@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+	<html>
+	    <head>
+	    <title>Menu</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/> 
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	    <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
+		 <link rel='stylesheet' type='text/css' href='../css/fullcalendar.css' />
+		 <link rel="stylesheet" href="../css/login.css" />
+		 <link rel="stylesheet" href="../css/jquery.ui.datepicker.mobile.css" /> 
+		 <!-- <link rel="stylesheet" href="../css/dashBoard.css" />-->
+		
+	    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+		<script>
+		//reset type=date inputs to text
+		$( document ).bind( "mobileinit", function(){
+			$.mobile.page.prototype.options.degradeInputs.date = true;
+		});	
+		</script>
+	    <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>	
+		<script type='text/javascript' src='../js/fullcalendar.js'></script>
+		
+		<script src="../js/jQuery.ui.datepicker.js"></script>
+		<script src="../js/jquery.ui.datepicker.mobile.js"></script>
+		<script src="../js/database.js"></script>
+		<script src="../js/dbActionDashboard.js"></script>
+		<script src="../js/login.js"></script>
+		<script src="../js/calendar.js"></script>
+	</head>
+	<body>
+	 
+	<div data-role="page" style="width:100%;height:100%">
+	    <!-- header -->
+	    <div data-role="header" data-theme="b" class ="header">
+			<img src="../images/person.png"  style="float:left;margin-left:1%;margin-top:4px"/><label id="person" class="h4Css" style="float:left;margin-left:0px;"></label>
+		   <img src="../images/logo.png"/ class ="imgCss">
+		   <div class ="headerLabel">
+	        <h4 class="h4Css" >STUDY GROUP FINDER</h4></div>
+			<img src="../images/logout.png"  style="float:right;margin-right:4%;margin-top:4px" id="logout"/>
+			<img src="../images/notify.png" style="float:right;margin-right:2%;margin-top:3px" onclick="displayNotifications()"/>
+	    </div>
+		<!-- /header -->
+	 <!--content -->
+		<div data-role="content"  class="contentDiv">
+		 <img src="../images/uparrow.png"/ style="display:none;" id="uparrow">
+		 
+		<!-- notification -->
+		<div id="notifyList" style="display:none">
+				<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow"style="margin-top:0px">
+			<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-corner-top ui-btn-up-c">
+				<div style="width:88%;" class="ui-btn-inner ui-li ui-corner-top" aria-hidden="true">
+				<div data-theme="a">
+					<h3 class="ui-li-heading" id="notifyName">Shashank</h3>
+					<p class="ui-li-desc" id="notifyPara"><strong>You've been added to a group Artificial Intelligence</strong></p>	
+				</div>
+				</div>
+			</li>
+		</ul>
+		</div>
+	
+	
+	
+	
+	
+ <div id="w" class="clearfix">
+    <ul id="sidemenu">
+      <li>
+        <a id="contentLink1" href="" class="open"><i class="icon-home icon-large"></i><strong>My Schedule</strong></a>
+      </li>
+
+      <li>
+        <a id="contentLink2" href=""><i class="icon-info-sign icon-large"></i><strong>My Meeting</strong></a>
+      </li>
+      
+      <li>
+        <a id="contentLink3" href=""><i class="icon-lightbulb icon-large"></i><strong>Create Meeting</strong></a>
+      </li>
+      
+      <li>
+        <a id="contentLink4" href=""><i class="icon-envelope icon-large"></i><strong>My Study Group</strong></a>
+      </li>
+	  <li>
+        <a id="contentLink5" href=""><i class="icon-envelope icon-large"></i><strong>Find Group</strong></a>
+      </li>
+	  <li>
+        <a id="contentLink6" href=""><i class="icon-envelope icon-large"></i><strong>Create Group</strong></a>
+      </li>
+	  <li>
+        <a id="contentLink7" href=""><i class="icon-envelope icon-large"></i><strong>Edit Contact Details</strong></a>
+      </li>
+	  
+    </ul>
+    
+    <div id="content">
+        <div id="contentDetails1" class="contentblock">
+           <div id='calendar' style="width:100%; font-size:90%;"></div>
+        </div>
+        
+        
+        <div id="contentDetails2" class="contentblock hidden">
+          <div id="myMeetingContent" style="margin-top:3%;  font-size: 70%;">
+		</div>
+        </div>
+        
+        <div id="contentDetails3" style="padding-top: 2%;" class="contentblock hidden">
+		<div id="createGroupContent">
+          <div style="font-size: 70%;"><p class="loginLabel" ><label>Name:</label></p>
+				<input class="inputFieldLabel" style="height:18px;" id ="meetingName"  type="text" /></div>
+			<div style="font-size: 70%;margin-top:0.5%;"><p class="loginLabel"><label >Place:</label></p>
+				<input id="place" style="height:18px;" class="inputFieldLabel" type="text" /></div>
+			<div style="font-size: 70%;margin-top:0.5%;"><p class="loginLabel"><label >Date:</label></p>
+				<input id="date" style="height:18px;" class="inputFieldLabel" type="date" /></div>
+			<div style="width:47%;font-size: 70%;margin-top:0.5%;float:left;"><p style="width:48%;" class="loginLabel"><label >Time From:</label></p>
+				
+				<input id="timefrom" style="width: 40%!important;height:18px;" type="time"  /></div>
+			<div style="font-size: 70%;margin-top:0.5%;"><p class="loginLabel"><label >Time To:</label></p>
+				<input id="timeto" style="width: 20%!important;height:18px;" type="time" /></div>
+			<a style="font-size: 80%;" id="createMeetingBtn" class="createMeeting" data-theme="a" data-role="button" rel="external" data-ajax ="false">Create Meeting</a>	
+        <!--added this/need to be styled-->
+				<div style="display:none;" id="errordivcreatemeeting" >
+				   <label id="errormessagecreatemeeting" style="font-weight:bold;color:#A00000;font-family:sans-serif;text-align:center;margin-left:8%"><label>
+				</div>
+		<!--  -->
+		</div>
+		
+		<div id ="groupstoBeAdded" style="display:none;">
+		<div id="groupsAdded" class="ui-grid-a byNameDivContent">
+			
+			</div>
+			</div>
+		
+		</div>
+        
+        <div id="contentDetails4" class="contentblock hidden">
+		<div id="myGroupContent" style="margin-top:3%;  font-size: 70%;">
+		
+		</div>
+        </div>
+		
+		
+		<div id="contentDetails5" class="contentblock hidden">
+		<div id = "findGroupDiv">
+         <h4 align="center">Find Group</h4>
+		 <fieldset id="radioGroup" data-role="controlgroup" data-mini="true">
+    	<input type="radio" name="radio-mini" id="radio-mini-1" value="choice-1" checked="checked" />
+    	<label  for="radio-mini-1">By Name</label>
+
+		<input type="radio" name="radio-mini" id="radio-mini-2" value="choice-2"  />
+    	<label for="radio-mini-2">By Topic</label>
+    	
+		</fieldset>
+		<a style="font-size: 80%;" id="goBtn" class="goBtn" data-theme="a" data-role="button" rel="external" data-ajax ="false">Go</a>
+		
+		
+		 </div>
+		<div id ="byNameDiv" style="display:none;">
+		<div id="byNameDivContent" class="ui-grid-a byNameDivContent">
+			
+			
+			</div>
+			</div>
+			<div id ="byMajorDiv" style="display:none;">
+		<div id="byMajorDivContent" class="ui-grid-a byNameDivContent">
+			
+			</div>
+			</div>
+		</div>
+        
+		
+		
+		<div id="contentDetails6"  class="contentblock hidden">
+         <div style="margin-top:4%;font-size: 90%;"><p class="loginLabel" ><label>Name</label></p>
+				<input class="inputFieldLabel" id ="groupName"  type="text" /></div>
+			<div style="font-size: 90%;margin-top:2%;"><p class="loginLabel"><label>Topic</label></p>
+				<input id="topic" class="inputFieldLabel" type="text" /></div>
+			<div style="font-size: 90%;margin-top:2%;"><p class="loginLabel"><label>Members</label></p>
+				<input id="members" class="inputFieldLabel" type="text" /><img id="addBtn" src="../images/add_icon.png" height="20" width="20" style="float: right;margin-top:1.5%;margin-right: 19%;"></div>
+			<div id="memberList" style="min-height:10px;font-size:80%;margin-left:25%; display:none;"></div>
+			<a style="font-size: 80%;" id="createGrpBtn" class="createGrpBtn" data-theme="a" data-role="button" rel="external" data-ajax ="false">Create Group</a>
+		<!--added this/need to be styled-->
+				<div style="display:none;" id="errordivcreategroup" >
+				   <label id="errormessagecreategroup" style="font-weight:bold;color:#A00000;font-family:sans-serif;text-align:center;margin-left:8%"><label>
+				</div>
+		<!--  -->
+	   </div>
+	   
+	     <div id="contentDetails7"  class="contentblock hidden">
+		 <div id="contactDetailsList">
+		<div  style="font-size:80%;width:65%;margin-right:auto;margin-left:auto;" class="ui-grid-a">
+			<div class="ui-block-a" style="width:35%;height:30px;"> Name:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">Saurav</div>
+			<div class="ui-block-a" style="width:35%;height:30px;"> Password:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">Namita</div>
+			<div class="ui-block-a" style="width:35%;height:30px;"> Email Id:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">saurav@ncsu.edu</div>
+			<div class="ui-block-a" style="width:35%;height:30px;"> Major:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">Computer Science</div>
+			<div class="ui-block-a" style="width:35%;height:30px;"> Degree:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">Masters</div>
+			<div class="ui-block-a" style="width:35%;height:30px;">Class:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">Human Computer Interaction</div>
+			<div class="ui-block-a" style="width:35%;height:30px;">Date:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">12/05/2014</div>
+			<div class="ui-block-a" style="width:35%;height:30px;">Time From:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">5:20PM</div>
+			<div class="ui-block-a" style="width:35%;height:30px;">Time To:</div>
+			<div class="ui-block-b" style="width:62%;height:30px;">6:35PM</div>
+			
+		</div>
+		
+		<a style="font-size: 80%;" id="editBtn" class="editBtn" data-theme="a" data-role="button" rel="external" data-ajax ="false">Edit</a>
+		
+		</div>
+		<div id="editContactDetails" style="display:none;font-size:80%;">  
+			<div style="margin-top:0.5%;"><p class="signupLabel" ><label>Name:</label></p>
+				<input class="inputFieldLabel" style="height:18px;" id ="name" type="text"/></div>
+			<div style="margin-top:0.5%;"><p class="signupLabel"><label >Password:</label></p>
+				<input id="newpassword" style="height:18px;" class="inputFieldLabel" type="password"/></div>
+			<div style="margin-top:0.5%;"><p class="signupLabel"><label >Email Id:</label></p>
+				<input id="email" style="height:18px;" class="inputFieldLabel" type="text"/></div>
+			<div style="margin-top:0.5%;"><p class="signupLabel"><label >Major:</label></p>
+				<input id="major" style="height:18px;" class="inputFieldLabel" type="text"/></div>
+			<div style="margin-top:0.5%;"><p class="signupLabel"><label >Degree:</label></p>
+				<input id="degree" style="height:18px;" class="inputFieldLabel" type="text"/></div> 
+			
+				<div style="margin-top:0.5%;"><p class="signupLabel"><label>Class:</label></p>
+				<input id="classSchedule" style="height:18px;" class="inputFieldLabel" type="text"/><img id="addClassBtn" src="../images/add_icon.png" height="20" width="20" style="float: right;margin-top:1%;margin-right: 19%;"></div>
+				
+				<div style=""><p style="margin-top:0.5%;" class="signupLabel"><label >Select Date:</label></p>
+			<div style="font-size: 70%;margin-top:0.5%;">
+				<input id="date" style="height:18px;" class="inputFieldLabel" type="text" /></div>
+			
+		</div>
+		
+		
+				<div style="width: 48%;margin-top:0.5%;float:left;"><p style="margin-left:9%;width:42%;" class="loginLabel"><label >Time From:</label></p>
+				
+				<input id="timeFrom" style="width: 42%!important;height:18px;" type="time"  /></div>
+			<div style="margin-top:0.5%;"><p class="loginLabel"><label >Time To:</label></p>
+			<input id="timeTo" style="width: 20%!important;height:18px;" type="time" /></div>
+			
+			<a id="editContactBtn" class="editBtn" data-theme="a" data-role="button" rel="external" data-ajax ="false">Edit Contact</a>
+		
+			</div>
+		
+		
+		
+		
+		</div>
+		
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+	
+	
+	
+	
+	
+	
+	
+		</div>
+	    <!--content -->
+		
+		  <!--footer-->
+		  <div data-role="footer" data-theme="b" class="header">
+			 <div></div>
+		</div> 
+		<!-- /footer -->
+		
+	    </div><!-- /content -->
+	 
+	</div><!-- /page -->
+	 
+	</body>
+	</html>

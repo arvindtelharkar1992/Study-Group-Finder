@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+	<html>
+	    <head>
+	    <title>Authentication</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/> 
+	    <link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
+		 <link rel="stylesheet" href="../css/login.css" />
+		 <!-- <link rel="stylesheet" href="../css/dashBoard.css" />-->
+		
+	    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+	    <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+		<script src="../js/database.js"></script>
+		<script src="../js/dbActionLogin.js"></script>
+		<script src="../js/dbActionDashboard.js"></script>
+		<script src="../js/login.js"></script>
+	</head>
+	<body>
+	 
+	<div data-role="page" style="width:100%;height:100%">
+	    <!-- header -->
+	    <div data-role="header" data-theme="b" class ="header">
+		   <img src="../images/logo.png"/ class ="loginimgCss">
+			<img src="../images/person.png"/ class ="loginimgCss" style="display:none;" id="person">
+		   <div class ="headerLabel">
+	        <h4 class="h4Css" >STUDY GROUP FINDER</h4></div>
+	    </div>
+		<!-- /header -->
+	 
+	    <!--content -->
+		<div data-role="content"  class="contentDiv">
+		<div id="loginDiv" class="loginDiv">
+		   <div class = "loginHeaderDiv" >Login</div>
+		   <div style="float:left;width:25%;margin:5% 0 0 5%;">
+		   <img src="../images/Login.png"/ width="200px;" >
+		   </div>
+		   <div style="float:left;width:68%;">
+			<div style="margin-top:14%;"><p class="loginLabel" ><label>Username</label></p>
+				<input style="margin-top: 2%;margin-left: 5%;" class="inputFieldLabel" id ="userName"  type="text" /></div>
+			<div style="clear:both"><p class="loginLabel"><label >Password</label></p>
+				<input style="margin-top: 2%;margin-left: 5%;" id="password" class="inputFieldLabel" type="password" /></div>
+				<a style="margin-left: 30%;font-size: 12px; color: white;" href="">Forgot your Password?</a>
+				<a id="submitBtn" class="submitBtn" data-theme="a" data-role="button">Submit</a>
+				<!--added this/need to be styled-->
+				<div style="display:none;" id="errordiv" >
+				   <label id="errormessage" style="font-weight:bold;color:#A00000;font-family:sans-serif;text-align:center;margin-left:8%"><label>
+				</div>
+		<!--  -->
+			
+			</div>
+				   
+		  </div>
+		  <div id ="signUpDiv" class="signUpDiv">
+		  
+		  <div class = "signUpHeaderDiv" ><img id="backButton" src="../images/backButton.png"/ class ="backButton"><p style="padding-top:2%;margin: 0 0 0 40%;float:left;">SignUp</p>
+		  <img id="nextBtn" src="../images/backButton.png"/ class ="nextButton" onclick="register()">
+		  
+		  </div>
+		  <div style="margin-top:5%;margin-left:14%; width:80%; font-size:90%;">
+			<div id="signupPage" style="display:block">  
+			<div style="margin-top:1%;"><p class="signupLabel" ><label>Name:</label></p>
+				<input class="inputFieldLabel" style="height:18px;" id ="name" type="text"/></div>
+			<div style="clear:both;margin-top:3%;"><p class="signupLabel"><label >Password:</label></p>
+				<input id="newpassword" style="height:18px;" class="inputFieldLabel" type="password"/></div>
+			<div style="clear:both;margin-top:3%;"><p class="signupLabel"><label >Email Id:</label></p>
+				<input id="email" style="height:18px;" class="inputFieldLabel" type="text"/></div>
+			<div style="clear:both;margin-top:3%;"><p class="signupLabel"><label >Major:</label></p>
+				<input id="major" style="height:18px;" class="inputFieldLabel" type="text"/></div>
+			<div style="clear:both;margin-top:3%;"><p class="signupLabel"><label >Degree:</label></p>
+				<input id="degree" style="height:18px;" class="inputFieldLabel" type="text"/></div> 
+			</div>
+			<div id="enterClassDetails" style="display:none">
+				<div style="clear:both;margin-top:1%;"><p style="width:24%;" class="signupLabel"><label>Class:</label></p>
+				<input id="classSchedule" style="height:18px;" class="inputFieldLabel" type="text"/><img id="addClassBtn" src="../images/add_icon.png" height="20" width="20" style="float: right;margin-top:1%;margin-right: 12%;"></div>
+				
+				<div style="clear:both;"><p style="margin-top:1%;width:23%;" class="signupLabel"><label >Select Date:</label></p>
+			<div style="font-size: 70%;margin-top:3%;">
+				<input id="date" style="height:18px;margin-left:1%;" class="inputFieldLabel" type="date" /></div>
+			
+		</div>
+		
+		
+				<div style="margin-top:3%;margin-left:-4%; float:left;width:52%"><p style="margin-left:14%;width:49%;" class="loginLabel"><label >Time From:</label></p>
+				
+				<input id="timeFrom" style="width:29%!important;height:18px;" type="time"  /></div>
+			<div style="margin-top:3%;"><p class="loginLabel"><label >Time To:</label></p>
+			<input id="timeTo" style="width: 15%!important;height:18px;" type="time" /></div>
+			
+		
+		
+		  </div>
+		  </div>
+		   <div id="classList" style="min-height:10px;font-size:80%;margin-left:25%; display:none;"></div>
+		   <a id="signUpBtn" class="signUpBtn" data-theme="a" data-role="button" style="display:none;">SignUp</a>
+		<!--   <a id ="addMoreClass" href="" style="display:none;width:20%;float:right">Add More</a>	-->
+		   <!--added this/need to be styled-->
+				<div style="display:none;" id="errordivsignup" >
+				   <label id="errormessagesignup" style="font-weight:bold;color:#A00000;font-family:sans-serif;text-align:center;margin-left:8%"><label>
+				</div>
+		<!--  -->
+		  </div> 
+		  <div id="signUpLinkDiv" style="color:black;font-size: 14px;float: right;margin-right: 30%;">Don't have an account? <a id ="signUpLink" href="">Sign Up</a></div>
+		
+		
+		
+		</div>
+	   
+		 <!--/content-->
+		  
+		  <!--footer-->
+		  <div data-role="footer" data-theme="b" class="header">
+			 <div></div>
+		</div> 
+		<!-- /footer -->
+		
+	    </div><!-- /content -->
+	 
+	</div><!-- /page -->
+	 
+	</body>
+	</html>
